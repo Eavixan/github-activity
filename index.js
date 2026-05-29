@@ -4,7 +4,7 @@ const username = process.argv[2];
 
 if (!username) {
   console.log("Please provide a GitHub username.");
-  console.log("Example: node index.js kamranahmedse");
+  console.log("Example: github-activity kamranahmedse");
   process.exit(1);
 }
 
@@ -51,6 +51,12 @@ async function fetchGitHubActivity() {
         console.log(`- Forked ${repoName}`);
       } else if (event.type === "CreateEvent") {
         console.log(`- Created ${event.payload.ref_type} in ${repoName}`);
+      } else if (event.type === "PullRequestEvent") {
+        console.log(`- ${event.payload.action} a pull request in ${repoName}`);
+      } else if (event.type === "IssueCommentEvent") {
+        console.log(`- Commented on an issue in ${repoName}`);
+      } else if (event.type === "DeleteEvent") {
+        console.log(`- Deleted ${event.payload.ref_type} in ${repoName}`);
       } else {
         console.log(`- ${event.type} in ${repoName}`);
       }
