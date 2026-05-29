@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const username = process.argv[2];
 
 if (!username) {
